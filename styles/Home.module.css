@@ -75,6 +75,13 @@
 
 .cart .button {
   font-size: .75em;
+  display: inline-flex;
+  align-items: center;
+  padding: .8em 1em;
+}
+
+.cart .button svg {
+  margin-right: .7em;  
 }
 
 .code {

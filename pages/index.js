@@ -1,61 +1,13 @@
-import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import products from '../products.json';
-import { initiateCheckout } from '../lib/payments.js';
-
-const defaultCart = {
-  products: {}
-}
+import useCart from '../hooks/use-cart.js';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function Home() {
 
-  const [cart, updateCart] = useState(defaultCart);
-
-  const cartItems = Object.keys(cart.products).map(key => {
-    const product = products.find(({ id }) => `${id}` === `${key}`);
-    return {
-      ...cart.products[key],
-      pricePerUnit: product.price
-    }
-  });
-
-  const subtotal = cartItems.reduce((accumulator, { pricePerUnit, quantity }) => {
-    return accumulator + ( pricePerUnit * quantity );
-  }, 0);
-
-  const quantity = cartItems.reduce((accumulator, { quantity }) => {
-    return accumulator + quantity;
-  }, 0);
-
-  function addToCart({ id }) {    
-    updateCart((prev) => {
-      let cart = {...prev};
-
-      if ( cart.products[id] ) {
-        cart.products[id].quantity = cart.products[id].quantity + 1
-      } else {
-        cart.products[id] = {
-          id,
-          quantity: 1
-        }
-      }
-
-      return cart;
-    });    
-  }
-
-  function checkout() {
-    initiateCheckout({
-      lineItems: cartItems.map(({ id, quantity }) => {
-        return {
-          price: id,
-          quantity
-        }
-      })
-    })
-  }
+  const { cartItems, subtotal, quantity, addToCart, checkout } = useCart();
 
   return (
     <div className={styles.container}>
@@ -77,7 +29,12 @@ export default function Home() {
         <p className={styles.cart}>
           <span><strong>Items:</strong> {quantity}</span>
           <span><strong>Total:</strong> ${subtotal}</span>
-          <span><button className={styles.button} onClick={checkout}>Check out</button></span>
+          <span>
+            <button className={styles.button} onClick={checkout}>
+              <FaShoppingCart />
+              Check out
+            </button>
+          </span>
         </p>
 
         <ul className={styles.grid}>
