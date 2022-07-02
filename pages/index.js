@@ -2,8 +2,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import products from '../products.json';
+import initiateCheckout from '../lib/payments.js';
 
-console.log(products)
+console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function Home() {
   return (
@@ -28,11 +29,25 @@ export default function Home() {
             const { id, title, description, image, price } = product;
             return (
               <li key={id} className={styles.card}>
-                <a href="#">
+                <a href="#">                
                   <img src={image} alt={title} />
                   <h3>{title}</h3>
                   <p>{description}</p>
                   <p className={styles.price}>${price}</p>
+                  <p>
+                    <button className={styles.button} onClick={() => {
+                      initiateCheckout({
+                        lineItems: [
+                          {
+                            price: id,
+                            quantity: 1
+                          }
+                        ]
+                      })
+                    }}>
+                      Buy
+                    </button>
+                  </p>
                 </a>
               </li> 
             )  
