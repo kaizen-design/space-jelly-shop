@@ -7,10 +7,6 @@
   align-items: center;
 }
 
-.relative {
-  position: relative;
-}
-
 .main {
   padding: 5rem 0;
   flex: 1;
@@ -64,6 +60,21 @@
 .description {
   line-height: 1.5;
   font-size: 1.5rem;
+}
+
+.cart {
+  line-height: 1.5;
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.cart span {
+  padding: 0 1rem;
+}
+
+.cart .button {
+  font-size: .75em;
 }
 
 .code {
