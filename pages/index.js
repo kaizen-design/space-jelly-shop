@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import products from '../products.json';
-import initiateCheckout from '../lib/payments.js';
+import { initiateCheckout } from '../lib/payments.js';
 
 console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
