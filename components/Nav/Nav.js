@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useCart } from '../../hooks/use-cart';
 
@@ -8,7 +9,11 @@ const Nav = () => {
   return (
     <nav className={styles.nav}>
       <p className={styles.navTitle}>
-        Space Jelly Shop
+        <Link href="/">
+          <a>
+            Space Jelly Shop
+          </a>  
+        </Link>  
       </p>
       <p className={styles.navCart}>
         <button onClick={checkout}>

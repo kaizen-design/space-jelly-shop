@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import products from '../products.json';
 import { useCart } from '../hooks/use-cart.js';
 import { FaShoppingCart } from 'react-icons/fa';
+import { toSeoUrl } from '../lib/helpers';
 
 export default function Home() {
 
@@ -41,11 +43,15 @@ export default function Home() {
           {products.map(product => {
             const { id, title, description, image, price } = product;
             return (
-              <li key={id} className={styles.card}>                              
-                <img src={image} alt={title} />
-                <h3>{title}</h3>
-                <p>{description}</p>
-                <p className={styles.price}>${price.toFixed(2)}</p>
+              <li key={id} className={styles.card}>  
+                <Link href={`/products/${toSeoUrl(title)}`}>
+                  <a>
+                    <img src={image} alt={title} />
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    <p className={styles.price}>${price.toFixed(2)}</p>
+                  </a>  
+                </Link>                              
                 <p>
                   <button className={styles.button} onClick={() => addToCart({ id })}>
                     Add to Cart
