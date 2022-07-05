@@ -1,4 +1,5 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Image from 'next/image';
 import styles from '../../styles/Product.module.css';
 import { useCart } from '../../hooks/use-cart';
 import { toSeoUrl } from '../../lib/helpers.js';
@@ -19,7 +20,12 @@ export default function Product({ product }) {
 
       <main className={styles.main}>
         <div className={styles.productImage}>
-          <img src={image} alt={title} />
+          <Image          
+            src={image}
+            alt={title}
+            width={400}
+            height={400}
+          />          
         </div>
 
         <div>

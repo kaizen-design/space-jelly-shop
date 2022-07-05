@@ -1,9 +1,10 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
 import { FaShoppingCart } from 'react-icons/fa';
 import styles from '../styles/Cart.module.css';
 import { useCart } from '../hooks/use-cart';
 import products from '../products.json';
-
+import { toSeoUrl } from '../lib/helpers';
 import Table from '../components/Table';
 
 const columns = [
@@ -55,9 +56,17 @@ export default function Cart() {
       )
     }
 
+    const Title = () => {
+      return (
+        <Link href={`/products/${toSeoUrl(title)}`}>
+          {title}
+        </Link>
+      )
+    }
+
     return {
       id,
-      title,
+      title: <Title />,
       quantity: <Quantity />,
       pricePerUnit: `\$${pricePerUnit.toFixed(2)}`,
       total: `\$${(quantity * pricePerUnit).toFixed(2)}`

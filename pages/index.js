@@ -46,7 +46,12 @@ export default function Home() {
               <li key={id} className={styles.card}>  
                 <Link href={`/products/${toSeoUrl(title)}`}>
                   <a>
-                    <img src={image} alt={title} />
+                    <Image          
+                      src={image}
+                      alt={title}
+                      width={224}
+                      height={224}
+                    />                    
                     <h3>{title}</h3>
                     <p>{description}</p>
                     <p className={styles.price}>${price.toFixed(2)}</p>
