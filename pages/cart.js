@@ -28,7 +28,7 @@ const columns = [
 
 export default function Cart() {
   
-  const { cartItems, checkout, updateItem } = useCart();
+  const { cartItems, checkout, updateItem, subtotal } = useCart();
 
   const data = cartItems.map(({ id, quantity, pricePerUnit }) => {
     const product = products.find(({ id: pid }) => pid === id);
@@ -87,6 +87,7 @@ export default function Cart() {
         </h1>
 
         <Table className={styles.table} data={data} columns={columns} />
+        <p className={styles.total}>Total: ${subtotal.toFixed(2)}</p>
 
         <p className={styles.checkout}>          
           <button className={styles.button} onClick={checkout}>

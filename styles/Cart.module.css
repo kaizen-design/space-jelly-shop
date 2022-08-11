@@ -184,3 +184,11 @@
   font-size: .6em;
   margin-left: 1em;
 }
+
+.total {
+  font-weight: bold;
+  text-align: right;
+  width: 100%;
+  font-size: 1.2em;
+  padding: 0 1em;
+}
